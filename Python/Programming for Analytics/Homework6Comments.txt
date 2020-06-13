@@ -1,0 +1,4 @@
+When you used the parameter 10 in your random calls, you limited the return values to something less than 10. 
+Functions are correct, but there wasn't a need to limit them, though I would admit it made checking things like 
+min/max a lot easier. No deduction, just an FYI. #7 - you did the data type of the elements in the array, not 
+the array itself

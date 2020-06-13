@@ -1,0 +1,158 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Mar 30 13:40:53 2020
+
+@author: Brooks Hanson
+"""
+
+#%% #1
+def NFactorial(n):
+    if n == 0:
+        return 1
+    else:
+        return (n * NFactorial(n-1))
+    
+n = 2959
+
+maxRecursionFactorial = NFactorial(n)
+
+res = [int(x) for x in str(maxRecursionFactorial)] 
+
+len(res)
+
+#%% #2
+def RevList(L):
+    if len(L) < 2:
+        return L
+    else:
+        return (RevList(L[1:]) + [L[0]])
+
+#%% #5
+#recursive
+def Fibb(f):
+    if f <= 1:
+        return f
+    else:
+        return (Fibb(f-1) + Fibb(f-2))
+
+print(Fibb(7))
+
+#iterative
+def fibonacci(n):
+    a,b = 0,1
+    for i in range(n):
+        a,b = b,a+b
+    return a
+
+print(fibonacci(8))    
+
+#The recursive function seem simple and easy at first. It works great for
+#single digit numbers. Rexursion taps out at about n = 35. This is becasue it
+#has to calculate all the previous numbers more than once and get all the way 
+#down to the base case every time. In an iterative version using a for loop and
+#swapping, it keeps track of the last fibonacci number as you go through. The
+#time complexity of a recursive fibonacci solution is O(2^n) whereas an 
+#iterative fibonacci solution is just O(n).
+
+#%% #6 showing moves plus ending state of stacks.
+class Stack:
+    def __init__(self, name):
+        self.items = []
+        self.name = name
+
+    def isEmpty(self):
+        return self.items == []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop() #built in function, returns item at end
+                                #destructive, no longer on stack
+    def peek(self):
+        return self.items[len(self.items)-1]
+                                #non-destructive, just see whats on top
+    def size(self):
+        return len(self.items)
+    
+    def __str__(self):
+        string = ""
+        for i in self.items:
+            string = string + str(i)+ " "
+        return(string)
+
+def printMove(fr,to):
+	print('move from ', fr.name, ' to ', to.name)
+    
+
+def stackTowers(n, a, b, spare):
+    if n == 1:
+        printMove(a,b)
+        b.push(a.pop())
+    else:
+        stackTowers(n-1, a, spare, b)
+        stackTowers(1, a, b, spare)
+        stackTowers(n-1, spare, b, a)
+    return ("Tower transfer complete: ")
+    
+n = int(input("Tower of size: "))
+a = Stack('A')
+b = Stack('B')
+spare = Stack('Spare')
+
+for i in range(n, 0, -1):
+    a.push(i)
+    
+print(stackTowers(n, a, b, spare), a.name,a.items,spare.name,spare.items,b.name,b.items)
+
+#%% #6 showing moves plus state of stacks throughout.
+class Stack:
+    def __init__(self, name):
+        self.items = []
+        self.name = name
+
+    def isEmpty(self):
+        return self.items == []
+
+    def push(self, item):
+        self.items.append(item)
+
+    def pop(self):
+        return self.items.pop() #built in function, returns item at end
+                                #destructive, no longer on stack
+    def peek(self):
+        return self.items[len(self.items)-1]
+                                #non-destructive, just see whats on top
+    def size(self):
+        return len(self.items)
+    
+    def __str__(self):
+        string = ""
+        for i in self.items:
+            string = string + str(i)+ " "
+        return(string)
+
+def printMove(fr,to,spare):
+    print(fr.name,fr.items,spare.name,spare.items,to.name,to.items, "\nmove from ", fr.name, " to ", to.name)
+    
+
+def stackTowers(n, a, b, spare):
+    if n == 1:
+        printMove(a,b,spare)
+        b.push(a.pop())
+    else:
+        stackTowers(n-1, a, spare, b)
+        stackTowers(1, a, b, spare)
+        stackTowers(n-1, spare, b, a)
+    return ("Tower transfer complete: ")
+    
+n = int(input("Tower of size: "))
+a = Stack('A')
+b = Stack('B')
+spare = Stack('Spare')
+
+for i in range(n, 0, -1):
+    a.push(i)
+
+print(stackTowers(n, a, b, spare), "\n", a.name,a.items,spare.name,spare.items,b.name,b.items)
+#%%

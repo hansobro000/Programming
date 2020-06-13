@@ -1,0 +1,4 @@
+Really nice work. Another solution that might be simpler for the last one 
+Auto_sub = Auto[(Auto['Mileage (mpg)'] > 21) & (Auto['Fuel Type'] == 'Regular')] 
+Really well done with a tough assignment and not much instruction to work with. 
+Great job tracking down the appropriate functions to use.

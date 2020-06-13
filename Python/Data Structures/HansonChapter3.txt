@@ -1,0 +1,133 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Mar 18 13:44:34 2020
+
+@author: Brooks Hanson
+"""
+#%%
+# Implement a stack using linked lists
+
+from NodeClass import *
+
+class LStack:
+    def __init__(self):
+        self.head = None
+        
+    def isEmpty(self):
+        return(self.head == None)
+    
+    def push(self,data):
+        temp = Node(data)
+        temp.setNext(self.head)
+        self.head = temp
+        
+    def pop(self):
+        current = self.head
+        self.head = current.getNext()
+        return(current.data)
+    
+    def peek(self):
+        return self.head.data
+    
+    def length(self):
+        current = self.head
+        count = 0
+        while current != None:
+            count = count +1
+            current = current.getNext()
+        return(count)
+    
+    def __str__(self):
+        current = self.head    
+        retstr = ""
+        while current != None:
+            retstr = retstr + str(current.data) + "\n"
+            current = current.getNext()
+        return(retstr)
+    
+uls = LStack()
+uls.push(10)
+uls.push(5)
+uls.push(16)
+
+print(uls)
+
+uls.peek()
+
+uls.pop()
+print(uls)
+
+uls.length()
+
+uls.isEmpty()
+#%%
+# Implement a queue using linked lists
+
+from NodeClass import *
+
+class LQueue:
+    def __init__(self):
+        self.head = None
+        
+    def isEmpty(self):
+        return(self.head == None)
+    
+    def enqueue(self,data):
+        temp = Node(data)
+        temp.setNext(self.head)
+        self.head = temp
+        
+    def dequeue(self):
+        current = self.head
+        previous = None
+        stop = False
+        
+        if current == None:
+            raise ValueError("Empty Queue")
+        
+        while not stop and current != None:
+            if current.getNext() == None:
+                stop = True
+            else:
+                previous = current
+                current = current.getNext()
+        
+        if previous == None:
+            self.head = current.getNext()
+        else:
+            previous.setNext(current.getNext())
+        
+        return(current.data)
+    
+    def length(self):
+        current = self.head
+        count = 0
+        while current != None:
+            count = count +1
+            current = current.getNext()
+        return(count)
+    
+    def __str__(self):
+        current = self.head    
+        retstr = ""
+        while current != None:
+            retstr = retstr + str(current.data) + "\n"
+            current = current.getNext()
+        return(retstr)
+    
+ulq = LQueue()
+
+ulq.enqueue(1)
+ulq.enqueue(5)
+ulq.enqueue(10)
+ulq.enqueue(16)
+
+print(ulq)
+
+ulq.dequeue
+
+print(ulq)
+
+ulq.length()
+
+ulq.isEmpty()
